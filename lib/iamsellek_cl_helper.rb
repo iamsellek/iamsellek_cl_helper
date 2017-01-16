@@ -1,6 +1,6 @@
 module IamsellekClHelper
   # Attempt to restore settings from previous version.
-  def restore_settings(gem_name)
+  def restore_settings(gem_name, version)
     lines_pretty_print "I see that you have a previous #{gem_name} installation on this machine."
     lines_pretty_print Rainbow('Would you like to restore its settings?').yellow
 
@@ -24,7 +24,7 @@ module IamsellekClHelper
 
     single_space
 
-    all_gems = Dir.glob("#{@app_directory.chomp("/#{gem_name}-#{VERSION}")}/wielder_of_anor*")
+    all_gems = Dir.glob("#{@app_directory.chomp("/#{gem_name}-#{version}")}/#{gem_name}*")
 
     # glob orders things in the array alphabetically, so the second-to-last one in the array is the
     # most recent version that is not the current version.
@@ -55,10 +55,6 @@ module IamsellekClHelper
     # Dir.chdir ensures all bash commands are being run from the correct
     # directory.
     Dir.chdir(directory) { system "#{command}" }
-  end
-
-  def set_app_directory
-    @app_directory = File.expand_path(File.dirname(__FILE__)).chomp('/lib')
   end
 
   def lines_pretty_print(string)
