@@ -1,3 +1,5 @@
+require 'rainbow'
+
 module IamsellekClHelper
   # Attempt to restore settings from previous version.
   def restore_settings(gem_name, version)
